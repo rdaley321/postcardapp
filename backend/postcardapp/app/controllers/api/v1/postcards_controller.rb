@@ -46,5 +46,5 @@ end
 private
 
 def postcard_params
-  params.permit(:message, :name, :address)
+  params.require(:postcard).permit(:message, :name, :address)
 end
