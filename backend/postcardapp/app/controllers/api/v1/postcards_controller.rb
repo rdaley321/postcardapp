@@ -13,16 +13,16 @@ class Api::V1::PostcardsController < ApplicationController
   end
 
   def create
-    @postcard.new(postcard_params)
+    @postcard = Postcard.new(postcard_params)
     if @postcard.save
       render json: @postcard, status: :accepted
     else
-      render json: { errors: @note.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: @postcard.errors.full_messages }, status: :unprocessible_entity
     end
   end
 
   def update
-    @postcard.update(postcard_params)
+    @postcard = Postcard.update(postcard_params)
     if @postcard.save
       render json: @postcard, status: :accepted
     else
@@ -46,5 +46,5 @@ end
 private
 
 def postcard_params
-  params.require(:postcard).permit(:message, :name, :address)
+  params.require(:postcard).permit(:message, :name, :address_id)
 end

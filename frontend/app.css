@@ -51,3 +51,15 @@ body {
 #street {
   margin-bottom: 8px;
 }
+
+#postcardbutton {
+  background-color: green;
+  font-size: 15px;
+  color: white;
+  border-radius: 5px;
+  width: 50%;
+  align-self: flex-end;
+  margin-bottom: 0;
+  margin-top: 10px;
+  margin-right: 40px;
+}
