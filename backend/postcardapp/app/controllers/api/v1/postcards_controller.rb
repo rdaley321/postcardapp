@@ -1,7 +1,7 @@
 class Api::V1::PostcardsController < ApplicationController
   def index
     @postcards = Postcard.all
-    render json: @postcards
+    render json: @postcards, methods: [:address]
   end
 
   def show
