@@ -7,6 +7,7 @@ function ce(arg) {
 }
 
 let states
+let page = 1
 
 function findState(){
   states.forEach(state => {
@@ -24,7 +25,7 @@ function findState(){
 
 function render() {
   qs('#postcardlist').innerHTML = ''
-  fetch('http://www.localhost:3000/api/v1/postcards')
+  fetch(`http://localhost:3000/api/v1/postcards?page=${page}&per_page=4`)
   .then(res => res.json())
   .then(res => {
     console.log(res)
@@ -111,4 +112,26 @@ qs('.postcardform').addEventListener('submit', (e) => {
       e.target.city.value = ''
     })
   })
+})
+
+qs('#forwardbutton').addEventListener('click', (e) => {
+  e.preventDefault()
+  page++
+  fetch(`http://localhost:3000/api/v1/postcards?page=${page}&per_page=4`)
+  .then(res => res.json())
+  .then(res => {
+    if(res.length === 0) {
+      page--
+    } else {
+      render()
+    }
+  })
+})
+
+qs('#backwardbutton').addEventListener('click', (e) => {
+  e.preventDefault()
+  if(page > 1) {
+    page--
+    render()
+  }
 })

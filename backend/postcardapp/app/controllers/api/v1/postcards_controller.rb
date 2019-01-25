@@ -1,6 +1,6 @@
 class Api::V1::PostcardsController < ApplicationController
   def index
-    @postcards = Postcard.all
+    @postcards = Postcard.paginate(page: params[:page], per_page: params[:per_page])
     render json: @postcards, methods: [:address, :state]
   end
 
