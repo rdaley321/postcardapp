@@ -28,10 +28,20 @@ ActiveRecord::Schema.define(version: 2019_01_23_195944) do
     t.text "message"
     t.string "name"
     t.bigint "address_id"
+    t.bigint "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_postcards_on_address_id"
+    t.index ["state_id"], name: "index_postcards_on_state_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "postcards", "addresses"
+  add_foreign_key "postcards", "states"
 end

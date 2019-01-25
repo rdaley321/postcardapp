@@ -6,6 +6,22 @@ function ce(arg) {
   return document.createElement(arg)
 }
 
+let states
+
+function findState(){
+  states.forEach(state => {
+    if(state.name === res.state){
+     return postCardData = {
+        message: e.target.message.value,
+        name: e.target.name.value,
+        address_id: res.id,
+        state_id: state.id,
+        url: state.url
+      }
+    }
+  })
+}
+
 function render() {
   qs('#postcardlist').innerHTML = ''
   fetch('http://www.localhost:3000/api/v1/postcards')
@@ -14,6 +30,7 @@ function render() {
     console.log(res)
     res.forEach(one => {
       let maindiv = ce('div')
+      let image = ce('img')
       let contentdiv = ce('div')
       let leftdiv = ce('div')
       let rightdiv = ce('div')
@@ -21,6 +38,8 @@ function render() {
       let p2 = ce('p')
       let p3 = ce('p')
       let p4 = ce('p')
+      image.src = one.state.image_url
+      image.className = 'smallpostcardimg'
       maindiv.className = 'maindiv'
       contentdiv.className = 'contentdiv'
       leftdiv.className = 'leftdiv'
@@ -32,7 +51,7 @@ function render() {
       rightdiv.append(p1, p2, p3)
       leftdiv.append(p4)
       contentdiv.append(leftdiv, rightdiv)
-      maindiv.append(contentdiv)
+      maindiv.append(image, contentdiv)
       qs('#postcardlist').append(maindiv)
     })
   })
@@ -40,6 +59,9 @@ function render() {
 
 document.addEventListener('DOMContentLoaded', (e) => {
   render()
+  fetch(`http://localhost:3000/api/v1/states`)
+    .then(res => res.json())
+    .then(res => states = res)
 })
 
 qs('.postcardform').addEventListener('submit', (e) => {
@@ -64,11 +86,16 @@ qs('.postcardform').addEventListener('submit', (e) => {
   })
   .then(res => res.json())
   .then(res => {
-    let postcardData = {
-      message: e.target.message.value,
-      name: e.target.name.value,
-      address_id: res.id
-    }
+    states.forEach(state => {
+      if(state.name === res.state){
+       return postcardData = {
+          message: e.target.message.value,
+          name: e.target.name.value,
+          address_id: res.id,
+          state_id: state.id
+        }
+      }
+    })
     fetch('http://www.localhost:3000/api/v1/postcards', {
       method: 'POST',
       headers: {
@@ -77,5 +104,11 @@ qs('.postcardform').addEventListener('submit', (e) => {
       body: JSON.stringify(postcardData)
     })
     .then(render)
+    .then(res => {
+      e.target.message.value = ''
+      e.target.name.value = ''
+      e.target.street.value = ''
+      e.target.city.value = ''
+    })
   })
 })

@@ -1,7 +1,7 @@
 class Api::V1::PostcardsController < ApplicationController
   def index
     @postcards = Postcard.all
-    render json: @postcards, methods: [:address]
+    render json: @postcards, methods: [:address, :state]
   end
 
   def show
@@ -46,5 +46,5 @@ end
 private
 
 def postcard_params
-  params.require(:postcard).permit(:message, :name, :address_id)
+  params.require(:postcard).permit(:message, :name, :address_id, :state_id)
 end

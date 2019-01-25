@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :postcards
       resources :addresses
+      resources :states
     end
   end
 end
