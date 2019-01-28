@@ -1,5 +1,28 @@
-body {
-  background-color: lightgrey
+@import url('https://fonts.googleapis.com/css?family=Bad+Script');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+header {
+  background-color: black;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Bad Script', cursive;
+  color: white;
+  margin: 0;
+}
+
+#main {
+  height: 100%;
+  background-image: url('vintage-grid.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .postcarddiv {
@@ -69,6 +92,12 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+
+#postcardlist p {
+  font-size: 12px;
 }
 
 .maindiv {
@@ -81,7 +110,9 @@ body {
   max-height: 150px;
   margin: 10px;
   font-size: 10px;
-  z-index: -2;
+  z-index: 9999;
+  border: 4px solid black;
+  border-radius: 3px;
 }
 
 .contentdiv {
@@ -97,7 +128,7 @@ body {
 }
 .rightdiv {
   flex-basis: 50%;
-  margin-top: 16px;
+  margin-top: 9px;
   margin-left: 10px;
 }
 
@@ -109,5 +140,20 @@ body {
 }
 
 #buttondiv {
-  margin-left: 20px;
+  text-align: center;
+  margin-right: 240px;
+}
+
+#backwardbutton {
+  background-color: green;
+  border-radius: 5px;
+  height: 20px;
+  width: 40px;
+}
+
+#forwardbutton {
+    background-color: green;
+  border-radius: 5px;
+  height: 20px;
+  width: 40px;
 }
